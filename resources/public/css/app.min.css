@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Fira';
+  src: url('/fonts/FiraCode-Retina.ttf');
+}
+
+.fira-icon {
+  border: solid 1px;
+  border-radius: 5px;
+  color: #00d1b2;;
+  cursor: pointer;
+  font-family: 'Fira';
+  padding: 0 5px;
+}
+.fira-icon:hover {
+  border-color: #00d1b2;
+  background-color: #00d1b2;
+  color: white;
+}
+
+.push-top {
+  margin-top: 20px;
+}
+
+.hotkey-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 3px;
+
+  border: 1px solid;
+  font-size: 0.8em;
+}
+
+/* Working with bulma */
+
+.card-footer-item {
+  text-align: center;
+  position: relative;
+}
+.card-footer-item.is-active, .card-footer-item:hover {
+  color: black;
+}
+.card-footer-item.is-correct {
+  background-color: #23d160;
+  color: white;
+}
+.card-footer-item.is-incorrect {
+  background-color: #ff3860;
+  color: white;
+}
+
+.notification {
+  height: 100%;
+}
