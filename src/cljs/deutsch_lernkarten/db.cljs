@@ -1,6 +1,6 @@
 (ns deutsch-lernkarten.db)
 
-(def why-learn [{:Deutsch "Die Nomen und Artikel sind für immer zusammer. Es gibt keine Alternative."
+(def why-learn [{:Deutsch "Die Nomen und Artikel sind für immer zusammen. Es gibt keine Alternative."
                  :English "The noun and article are forever together. There is no alternative."}
                 {:Deutsch "Es gibt verschiedene Pluralendungen. Die Pluralendungen muss man auswendig lernen."
                  :English "There are different plural endings. The plural endings you must learn by heart."}

@@ -14,7 +14,7 @@
     [:header {:className "card-header"}
      [:div {:className "card-header-title"} "Nomen mit Artikel"]]
     [:div {:className "card-content"}
-     [:div {:className "content"} "Die Nomen und Artikel sind für immer zusammer. Es gibt keine Alternative."]]
+     [:div {:className "content"} "Die Nomen und Artikel sind für immer zusammen. Es gibt keine Alternative."]]
     [:footer {:className "card-footer"}
      [:a {:className "card-footer-item" :on-click #(re-frame/dispatch [:nomen-artikel-fragen/initialisieren])}
       "Beginnen Sie mit dem Training"
