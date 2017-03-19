@@ -12,9 +12,9 @@
   (keyboard/register! {:space #(re-frame/dispatch [:nomen-artikel-fragen/initialisieren])})
   [:div {:className "card"}
     [:header {:className "card-header"}
-     [:p {:className "card-header-title"} "Nomen mit Artikel"]]
+     [:div {:className "card-header-title"} "Nomen mit Artikel"]]
     [:div {:className "card-content"}
-     [:div {:className "content"} "Beginnen Sie mit dem Training"]]
+     [:div {:className "content"} "Die Nomen und Artikel sind für immer zusammer. Es gibt keine Alternative."]]
     [:footer {:className "card-footer"}
      [:a {:className "card-footer-item" :on-click #(re-frame/dispatch [:nomen-artikel-fragen/initialisieren])}
       "Beginnen Sie mit dem Training"
@@ -49,7 +49,7 @@
        (if (nil? aktiv-antwort)
          (name aktiv-nomen)
          [:div
-          (str (name (:Artikel nomen-fakten)) " " (name aktiv-nomen) " (" (:English nomen-fakten) ")")
+          (str (name (:Artikel nomen-fakten)) " " (name aktiv-nomen) " ( " (:English nomen-fakten) " )")
           [:span {:className "fira-icon is-primary is-pulled-right" :on-click #(re-frame/dispatch [:nomen-artikel-fragen/gesehen-aktiv-nomen])} "->>"]])]]
 
     [:footer {:className "card-footer"}
@@ -75,15 +75,16 @@
 (defn stamm []
   (let [aktiv-nomen (re-frame/subscribe [:nomen-artikel-fragen/aktiv-nomen])
         aktiv-antwort (re-frame/subscribe [:nomen-artikel-fragen/aktiv-antwort])
-        alle-nomen-fakten (re-frame/subscribe [:Fakten/Nomen])
+        Nomina (re-frame/subscribe [:Fakten/Nomina])
         glückwunsch (re-frame/subscribe [:nomen-artikel-fragen/glückwunsch])]
     (fn []
-      [:div {:className "columns is-mobile push-top"}
-        [:div {:className "column is-4-desktop is-offset-4-desktop
-                                  is-6-tablet is-offset-3-tablet
-                                  is-8-mobile is-offset-2-mobile"}
-          (if (true? @glückwunsch)
-            [render-glückwunsch]
-            (if (nil? @aktiv-nomen)
-              [render-anfang]
-              [render-karte @aktiv-nomen @aktiv-antwort (get @alle-nomen-fakten @aktiv-nomen)]))]])))
+      [:section {:className "section"}
+        [:div {:className "columns is-mobile"}
+          [:div {:className "column is-4-desktop is-offset-4-desktop
+                                    is-6-tablet is-offset-3-tablet
+                                    is-8-mobile is-offset-2-mobile"}
+            (if (true? @glückwunsch)
+              [render-glückwunsch]
+              (if (nil? @aktiv-nomen)
+                [render-anfang]
+                [render-karte @aktiv-nomen @aktiv-antwort (get @Nomina @aktiv-nomen)]))]]])))

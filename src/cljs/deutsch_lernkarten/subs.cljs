@@ -5,9 +5,14 @@
 ; fakten
 
 (re-frame/reg-sub
- :Fakten/Nomen
+ :Fakten/Nomina
  (fn [db]
-   (get-in db [:Fakten :Nomen])))
+   (get-in db [:Fakten :Nomina])))
+
+(re-frame/reg-sub
+ :Fakten/Pronomina
+ (fn [db]
+   (get-in db [:Fakten :Pronomina])))
 
 (re-frame/reg-sub
  :Fakten/Verben

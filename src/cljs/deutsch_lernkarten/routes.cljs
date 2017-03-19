@@ -7,6 +7,8 @@
 
                   "verben-liste"          :verben-liste
 
+                  "pronomen-liste"        :pronomen-liste
+
                   "nomen-liste"           :nomen-liste
                   "nomen-artikel-fragen"  :nomen-artikel-fragen}])
 

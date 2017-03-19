@@ -1,34 +1,8 @@
+/* Fonts */
+
 @font-face {
   font-family: 'Fira';
   src: url('/fonts/FiraCode-Retina.ttf');
-}
-
-.fira-icon {
-  border: solid 1px;
-  border-radius: 5px;
-  color: #00d1b2;;
-  cursor: pointer;
-  font-family: 'Fira';
-  padding: 0 5px;
-}
-.fira-icon:hover {
-  border-color: #00d1b2;
-  background-color: #00d1b2;
-  color: white;
-}
-
-.push-top {
-  margin-top: 20px;
-}
-
-.hotkey-indicator {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 3px;
-
-  border: 1px solid;
-  font-size: 0.8em;
 }
 
 /* Working with bulma */
@@ -49,6 +23,55 @@
   color: white;
 }
 
+.nav {
+  margin-top: 20px;
+}
+a.nav-item:hover, a.nav-item.is-active {
+  color: #00d1b2;
+}
+
 .notification {
   height: 100%;
+}
+
+.section {
+  background-color: inherit;
+}
+
+/* App styles */
+
+body:before {
+  background-image: url('/img/topographic.png');
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.fira-icon {
+  border: solid 1px;
+  border-radius: 5px;
+  color: #00d1b2;;
+  cursor: pointer;
+  font-family: 'Fira';
+  padding: 0 5px;
+}
+.fira-icon:hover {
+  border-color: #00d1b2;
+  background-color: #00d1b2;
+  color: white;
+}
+
+.hotkey-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 3px;
+
+  border: 1px solid;
+  font-size: 0.8em;
 }

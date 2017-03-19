@@ -35,7 +35,9 @@
 (re-frame/reg-event-db
   :navigation/menü-aktiv
   (fn [db [_ aktiv?]]
-    (assoc db :navigation/menü-aktiv aktiv?)))
+    (if (not (= (:navigation/menü-aktiv db) aktiv?))
+      (assoc db :navigation/menü-aktiv aktiv?)
+      db)))
 
 (re-frame/reg-event-db
   :navigation/menü-umschalten
@@ -52,7 +54,7 @@
       (assoc :nomen-artikel-fragen/glückwunsch false)))
 
 (defn nomen-artikel-fragen-next-aktiv-nomen [db]
-  (let [remaining-nomen (into [] (clojure.set/difference (into #{} (keys (get-in db [:Fakten :Nomen])))
+  (let [remaining-nomen (into [] (clojure.set/difference (into #{} (keys (get-in db [:Fakten :Nomina])))
                                                          (:nomen-artikel-fragen/gesehen-nomen db)))]
     (if (empty? remaining-nomen)
       (assoc db :nomen-artikel-fragen/glückwunsch true)
