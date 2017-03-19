@@ -9,12 +9,21 @@
                 {:Deutsch "Ich weiß es nicht, aber lasst uns herausfinde."
                  :English "I do not know, but let's find out."}])
 
-(def phrases {})
+(def phrases {"Aber gut geht er mir." "But I am doing well."
+              "Das schaffe ich." "I can do it."
+              "Ich habe es nie gehabt." "I have never had it."
+              "Ich liebe Lampe." "I love lamp."
+              "Mein Hund fraß eine Katze." "My dog ate a cat."
+              "Mein Löffel ist zu groß." "My spoon is to big."})
 
 (def Adverb {"doch" "but"
              "ja" "yes"
+             "jawohl" "yes sir"
              "nein" "no"
-             "nur" "only"})
+             "noch" "still"
+             "nur" "only"
+             "vielleicht" "maybe / perhaps"
+             "wieder" "again"})
 
 (def W-Frage {"Wann" "When"
               "Warum" "Why"
@@ -27,12 +36,14 @@
 (def Adjektiv {"arbeitslos" "unemployed"
                "allein" "alone"
                "falsch" "incorrect"
+               "gemütlich" "cozy"
                "genau" "exactly"
                "günstig" "cheap"
                "richtig" "correct"
                "super" "great"
                "teuer" "expensive"
-               "toll" "great"})
+               "toll" "great"
+               "verschiedene" "various"})
 
 (def Lokale-Präpositionen {"auf" "on"
                            "an" "on the side of"
@@ -58,7 +69,8 @@
 
 ; Some additional info:
 ; http://canoo.net/services/OnlineGrammar/Wort/Artikel/Artikelwort/Liste.html
-(def Pronomen {"das" {:Maskulin {:Nominativ "der"
+(def Pronomen {"das" {:English "the"
+                      :Maskulin {:Nominativ "der"
                                  :Akkusativ "den"
                                  :Dativ "dem"
                                  :Genitiv "dessen"}
@@ -74,7 +86,8 @@
                                :Akkusativ "die"
                                :Dativ "den"
                                :Genitiv "der"}}
-               "dein" {:Maskulin {:Nominativ "dein"
+               "dein" {:English "your"
+                       :Maskulin {:Nominativ "dein"
                                   :Akkusativ "deinen"
                                   :Dativ "deinem"
                                   :Genitiv "deines"}
@@ -90,7 +103,8 @@
                                 :Akkusativ "deine"
                                 :Dativ "deinen"
                                 :Genitiv "deiner"}}
-               "ein" {:Maskulin {:Nominativ "ein"
+               "ein" {:English "a / an"
+                      :Maskulin {:Nominativ "ein"
                                  :Akkusativ "einen"
                                  :Dativ "einem"
                                  :Genitiv "eines"}
@@ -102,7 +116,8 @@
                                 :Akkusativ "eine"
                                 :Dativ "einer"
                                 :Genitiv "einer"}}
-               "kein" {:Maskulin {:Nominativ "kein"
+               "kein" {:English "not"
+                       :Maskulin {:Nominativ "kein"
                                   :Akkusativ "keinen"
                                   :Dativ "keinem"
                                   :Genitiv "keines"}
@@ -117,7 +132,41 @@
                        :Plural {:Nominativ "keine"
                                 :Akkusativ "keine"
                                 :Dativ "keinen"
-                                :Genitiv "keiner"}}})
+                                :Genitiv "keiner"}}
+               "sich" {:English "themselves"
+                       :Maskulin {:Nominativ nil
+                                  :Akkusativ "sich"
+                                  :Dativ "sich"
+                                  :Genitiv "seiner"}
+                       :Neutrum {:Nominativ nil
+                                 :Akkusativ "sich"
+                                 :Dativ "sich"
+                                 :Genitiv "seiner"}
+                       :Feminin {:Nominativ nil
+                                 :Akkusativ "sich"
+                                 :Dativ "sich"
+                                 :Genitiv "ihrer"}
+                       :Plural {:Nominativ nil
+                                :Akkusativ "sich"
+                                :Dativ "sich"
+                                :Genitiv "ihrer"}}
+               "sein" {:English "be"
+                       :Maskulin {:Nominativ "sein"
+                                  :Akkusativ "seinen"
+                                  :Dativ "seinem"
+                                  :Genitiv "sines"}
+                       :Neutrum {:Nominativ "sein"
+                                 :Akkusativ "sein"
+                                 :Dativ "seinem"
+                                 :Genitiv "seines"}
+                       :Feminin {:Nominativ "seine"
+                                 :Akkusativ "seine"
+                                 :Dativ "seiner"
+                                 :Genitiv "seiner"}
+                       :Plural {:Nominativ "seine"
+                                :Akkusativ "seine"
+                                :Dativ "seinen"
+                                :Genitiv "seiner"}}})
 
 (def Verben (into (sorted-map)
                   {"arbeiten" {:English "working"
@@ -191,6 +240,16 @@
                                        :wir "fahren"
                                        :ihr "fahrt"
                                        :sie-Sie "fahren"}}
+                   "faulen" {:English "lazy"
+                             :Hilfsverb :haben
+                             :Präsens {:ich "faule"
+                                       :du "faulst"
+                                       :er-sie-es "fault"
+                                       :wir "faulen"
+                                       :ihr "fault"
+                                       :sie-Sie "faulen"}
+                             :Perfekt "gefault"}
+
                    "finden" {:English "find"
                              :Hilfsverb :haben
                              :Präsens {:ich "finde"
@@ -204,9 +263,29 @@
                             :Präsens {:ich "gebe"
                                       :du "gibst"
                                       :er-sie-es "gibt"
-                                      :wit "geben"
+                                      :wir "geben"
                                       :ihr "gebt"
                                       :sie-Sie "geben"}}
+                   "gehen" {:English "go"
+                            :Hilfsverb :sein
+                            :Präsens {:ich "gehe"
+                                      :du "gehst"
+                                      :er-sie-es "geht"
+                                      :wir "gehen"
+                                      :ihr "geht"
+                                      :sie-Sie "gehen"}
+                            :Perfekt "gegangen"}
+
+                   "gesunden" {:English "healthy"
+                               :Hilfsverb :sein
+                               :Präsens {:ich "gesunde"
+                                         :du "gesundest"
+                                         :er-sie-es "gesundet"
+                                         :wir "gesunden"
+                                         :ihr "gesundet"
+                                         :sie-Sie "gesunden"}
+                               :Perfekt "gesundet"}
+
                    "glauben" {:English "believe"
                               :Hilfsverb :haben
                               :Präsens {:ich "glabe"
@@ -239,6 +318,15 @@
                                        :wir "heißen"
                                        :ihr "heißt"
                                        :sie-Sie "heißen"}}
+                   "holen" {:English "fetch"
+                            :Hilfsverb :haben
+                            :Präsens {:ich "hole"
+                                      :du "holst"
+                                      :er-sie-es "holt"
+                                      :wir "holen"
+                                      :ihr "holt"
+                                      :sie-Sie "holen"}
+                            :Perfekt "geholt"}
                    "können" {:English "can"
                              :Präsens {:ich "kann"
                                        :du "kannst"
@@ -306,12 +394,14 @@
                                        :sie-Sie "meinen"}
                              :Perfekt "gemeint"}
                    "möchten" {:English "want"
+                              :Hilfsverb :haben
                               :Präsens {:ich "möchte"
                                         :du "möchtest"
                                         :er-sie-es "möchte"
                                         :wir "möchten"
                                         :ihr "möchtet"
-                                        :sie-Sie "möchten"}}
+                                        :sie-Sie "möchten"}
+                              :Perfekt "gemocht"}
                    "mögen" {:English "like"
                             :Präsens {:ich "mag"
                                       :du "magst"
@@ -326,6 +416,16 @@
                                        :wir "nehmen"
                                        :ihr "nehmt"
                                        :sie-Sie "nehmen"}}
+                   "öffnen" {:English "open"
+                               :Hilfsverb :haben
+                               :Präsens {:ich "öffne"
+                                         :du "öffnest"
+                                         :er-sie-es "öffnet"
+                                         :wir "öffnen"
+                                         :ihr "öffnet"
+                                         :sie-Sie "öffnen"}
+                               :Perfekt "geöffnet"}
+
                    "raten" {:English "guess"
                             :Präsens {:ich "rate"
                                       :du "rätst"
@@ -333,6 +433,16 @@
                                       :wir "raten"
                                       :ihr "ratet"
                                       :sie-Sie "raten"}}
+                   "räumen" {:English "clean"
+                               :Hilfsverb :haben
+                               :Präsens {:ich "räume"
+                                         :du "räumst"
+                                         :er-sie-es "räumt"
+                                         :wir "räumen"
+                                         :ihr "räumt"
+                                         :sie-Sie "räumen"}
+                               :Perfekt "geräumt"}
+
                    "sagen" {:English "say"
                             :Hilfsverb :haben
                             :Präsens {:ich "sage"
@@ -388,6 +498,15 @@
                                        :wir "suchen"
                                        :ihr "sucht"
                                        :sie-Sie "suchen"}}
+                   "treffen" {:English "meet"
+                              :Hilfsverb :haben
+                              :Präsens {:ich "treffe"
+                                        :du "triffst"
+                                        :er-sie-es "trifft"
+                                        :wir "treffen"
+                                        :ihr "trefft"
+                                        :sie-Sie "treffen"}
+                              :Perfekt "getroffen"}
                    "treten" {:English "step"
                              :Präsens {:ich "trete"
                                        :du "trittst"
@@ -423,6 +542,16 @@
                                               :ihr "verheiratet"
                                               :sie-Sie "verheiraten"}
                                   :Perfekt "verheiratet"}
+                   "werden" {:English "become"
+                             :Hilfsverb :sein
+                             :Präsens {:ich "werde"
+                                       :du "wirst"
+                                       :er-sie-es "wird"
+                                       :wir "werden"
+                                       :ihr "werdet"
+                                       :sie-Sie "werden"}
+                             :Perfekt "geworden"}
+
                    "wissen" {:English "know"
                              :Präsens {:ich "weiß"
                                        :du "weißt"
@@ -438,7 +567,18 @@
                                        :wir "wohnen"
                                        :ihr "wonnt"
                                        :sie-Sie "wohnen"}
-                             :Perfekt "gewohnt"}}))
+                             :Perfekt "gewohnt"}
+                   "zahlen" {:English "Pay"
+                             :Hilfsverb "haben"
+                             :Präsens {:ich "zahle"
+                                       :du "zhalst"
+                                       :er-sie-es "zahlt"
+                                       :wir "zahlen"
+                                       :ihr "zahlt"
+                                       :sie-Sie "zahlen"}
+                             :Perfekt "gezahlt"}}))
+
+
 
 ; want a way to resolve the keyword, but still mark it as Plural Nomen
 (def plural-artikel :die)
@@ -448,6 +588,8 @@
                            :English "Age"}
                   "Ampel" {:Artikel :die
                            :English "Traffic Light"}
+                  "Anfang" {:Artikel :der
+                              :English "Beginning"}
                   "Angebot" {:Artikel :das
                              :English "offer"}
                   "Antwort" {:Artikel :die
@@ -456,6 +598,8 @@
                                  :English "Employer"}
                   "Artikel" {:Artikel :der
                              :English "Item"}
+                  "Arzt" {:Artikel :der
+                          :English "Doctor"}
                   "Ausbildung" {:Artikel :die
                                 :English "Training"}
                   "Auto" {:Artikel :das
@@ -506,8 +650,12 @@
                            :English "Grandson"}
                   "Enkelin" {:Artikel :die
                              :English "Granddaughter"}
+                  "Ernährung" {:Artikel :die
+                               :English "Nutrition"}
                   "Fahrrad" {:Artikel :das
                              :English "Bicycle"}
+                  "Fall" {:Artikel :der
+                          :English "case"}
                   "Familie" {:Artikel :die
                              :English "Family"}
                   "Familienstand" {:Artikel :der
@@ -548,6 +696,10 @@
                            :English "Mobile phone"}
                   "Haus" {:Artikel :das
                           :English "House"}
+                  "Heilkräuter" {:Artikel :das
+                                 :English "Medicinal Herbs"}
+                  "Heim" {:Artikel :das
+                          :English "Home"}
                   "Hochshule" {:Artikel :die
                                :English "College"}
                   "Holz" {:Artikel :das
@@ -574,16 +726,24 @@
                              :English "Colleague"}
                   "Küche" {:Artikel :die
                            :English "Kitchen"}
+                  "Künstler" {:Artikel :der
+                              :English "Artist"}
                   "Kunststoff" {:Artikel :das
                                 :English "Plastic"}
                   "Lampe" {:Artikel :die
                            :English "Lamp"}
+                  "Lebensmittel" {:Artikel :das
+                                  :English "Food"}
+                  "Loch" {:Artikel :das
+                          :English "Hole"}
                   "Mann" {:Artikel :der
                           :English "Man"}
-                  "Material" {:Artikel :das
-                              :English "Material"}
                   "Metall" {:Artikel :das
                             :English "Metal"}
+                  "Material" {:Artikel :das
+                              :English "Material"}
+                  "Matrix" {:Artikel :die
+                            :English "Matrix"}
                   "Meter" {:Artikel :der
                            :English "Meter"}
                   "Milch" {:Artikel :die
@@ -604,6 +764,8 @@
                            :English "Music"}
                   "Nähe" {:Artikel :die
                           :English "Close / Near"}
+                  "Nomen" {:Artikel :das
+                           :English "Noun"}
                   "Oma" {:Artikel :die
                          :English "Grandmother"}
                   "Opa" {:Artikel :der
@@ -634,12 +796,18 @@
                            :English "Rule"}
                   "Restaurant" {:Artikel :das
                                 :English "Restaurant"}
+                  "Salbei" {:Artikel :der
+                            :English "Sage"}
+                  "Satellit" {:Artikel :der
+                              :English "Satellite"}
                   "Satz" {:Artikel :der
                           :English "Sentence"}
                   "Schlafzimmer" {:Artikel :das
                                   :English "Bedroom"}
                   "Schrank" {:Artikel :der
                              :English "Closet"}
+                  "Schritt" {:Artikel :der
+                             :English "Step"}
                   "Schule" {:Artikel :die
                             :English "School"}
                   "Schwester" {:Artikel :die
@@ -678,6 +846,8 @@
                                   :English "Language School"}
                   "Supermarkt" {:Artikel :der
                                 :English "Supermarket"}
+                  "Szene" {:Artikel :die
+                           :English "Scene"}
                   "Tasche" {:Artikel :die
                             :English "Bag"}
                   "Telefonummer" {:Artikel :der
@@ -692,10 +862,14 @@
                             :English "Stairs"}
                   "Tur" {:Artikel :die
                          :English "Door"}
+                  "Übersetzung" {:Artikel :die
+                                 :English "Translation"}
                   "Universität" {:Artikel :die
                                  :English "University"}
                   "Uhr" {:Artikel :die
                          :English "Clock / Watch"}
+                  "Urlaub" {:Artikel :der
+                            :English "Vacation"}
                   "Vater" {:Artikel :der
                            :English "Father"}
                   "Verb" {:Artikel :der

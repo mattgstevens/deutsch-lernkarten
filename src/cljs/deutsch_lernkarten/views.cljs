@@ -66,9 +66,10 @@
   (fn []
     [:div
      [:h1 "404"]
-     [:div "Sie fanden ein Loch in der Matrix."]
+     [:div "Du hast in der Matrix ein Loch gefunden."]
      [:a {:className "button" :href (routes/url-for :heim)} "Heim gehen"]]))
 
+; TODO: this should live in routes
 (def szeneMap {:heim [heim-szene]
 
                :nomen-artikel-fragen [nomen-artikel-fragen-szene/stamm]
