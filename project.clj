@@ -6,8 +6,7 @@
                  [reagent "0.6.0"]
                  [re-frame "0.9.1"]]
 
-  :plugins [[lein-cljsbuild "1.1.4"]
-            [lein-re-frisk "0.4.4"]]
+  :plugins [[lein-cljsbuild "1.1.5"]]
 
   :min-lein-version "2.5.3"
 
@@ -24,24 +23,21 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "0.8.2"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [re-frisk-remote "0.4.1"]]
-                   :plugins      [[lein-figwheel "0.5.8"]]}}
+                   :plugins      [[lein-figwheel "0.5.9"]
+                                  [lein-re-frisk "0.4.4"]]}}
 
-  :cljsbuild {:builds [{:id           "dev"
-                        :source-paths ["src/cljs"]
-                        :figwheel     {:on-jsload "deutsch-lernkarten.core/mount-root"}
-
-                        :compiler     {:main                 deutsch-lernkarten.core
-                                       :output-to            "resources/public/js/compiled/app.js"
-                                       :output-dir           "resources/public/js/compiled/out"
-                                       :asset-path           "js/compiled/out"
-                                       :source-map-timestamp true
-                                       :preloads             [devtools.preload]
-                                       :external-config      {:devtools/config {:features-to-install :all}}}}
-
-                       {:id           "min"
-                        :source-paths ["src/cljs"]
-                        :compiler     {:main            deutsch-lernkarten.core
-                                       :output-to       "resources/public/js/compiled/app.js"
-                                       :optimizations   :advanced
-                                       :closure-defines {goog.DEBUG false}
-                                       :pretty-print    false}}]})
+  :cljsbuild {:builds {:dev {:source-paths ["src/cljs"]
+                             :figwheel     {:on-jsload "deutsch-lernkarten.core/mount-root"}
+                             :compiler     {:main                 deutsch-lernkarten.core
+                                            :output-to            "resources/public/js/compiled/app.js"
+                                            :output-dir            "resources/public/js/compiled"
+                                            :asset-path           "js/compiled/out"
+                                            :source-map-timestamp true
+                                            :preloads             [devtools.preload]
+                                            :external-config      {:devtools/config {:features-to-install :all}}}}
+                       :min {:source-paths ["src/cljs"]
+                             :compiler     {:main            deutsch-lernkarten.core
+                                            :output-to       "resources/public/js/compiled/app.js"
+                                            :optimizations   :advanced
+                                            :closure-defines {goog.DEBUG false}
+                                            :pretty-print    false}}}})
