@@ -11,6 +11,7 @@
 
 (def phrases {"Aber gut geht er mir." "But I am doing well."
               "Das schaffe ich." "I can do it."
+              "Ich bin hell wach!" "I am so awake!"
               "Ich habe es nie gehabt." "I have never had it."
               "Ich liebe Lampe." "I love lamp."
               "Mein Hund fraß eine Katze." "My dog ate a cat."
@@ -35,6 +36,7 @@
 
 (def Adjektiv {"arbeitslos" "unemployed"
                "allein" "alone"
+               "erfolgreiches" "successful"
                "falsch" "incorrect"
                "gemütlich" "cozy"
                "genau" "exactly"
@@ -43,7 +45,8 @@
                "super" "great"
                "teuer" "expensive"
                "toll" "great"
-               "verschiedene" "various"})
+               "verschiedene" "various"
+               "wichtige" "important"})
 
 (def Lokale-Präpositionen {"auf" "on"
                            "an" "on the side of"
@@ -55,17 +58,63 @@
                            "unter" "under"
                            "in" "inside"})
 
-; not sure where this goes yet
-(def Kurzform {:dem {:im "in dem"
-                     :am "am dem"
-                     :beim "bei dem"
-                     :vom "von dem"
-                     :zum "zu dem"}
-               :das {:ans "an das"
-                     :ins "in das"
-                     :aufs "auf das"
-                     :fürs "für das"
-                     :ums "um das"}})
+(def Temporale-Präpositionen {"ab" {:English "as of" :Beispiel {:Deutsch "Keine weiteren Berichte ab 10:00 Uhr."
+                                                                :English "No further reports as of 10:00 am."}}
+                              "an" {:English "at" :Beispiel {:Deutsch "An welchem Tag hast du Geburtstag?"
+                                                             :English "At which day is your birthday?"}}
+                              "auf" {:English "on" :Beispiel {:Deutsch "Lass uns auf dem Bahnsteig am Hauptbahnhof treffen."
+                                                              :English "Let's meet on the platform at the Central station."}}
+                              "aus" {:English "from" :Beispiel {:Deutsch "Dieser Stil der Moderne stammt aus der Bauhauszeit."
+                                                                :English "This style of modernism is from the Bauhaus period."}}
+                              "außerhalb" {:English "outside" :Beispiel {:Deutsch "Dieses Produkt wird außerhalb dieser Saison versandt."
+                                                                         :English "This product will be shipped outside this season."}}
+                              "bei" {:English "near" :Beispiel {:Deutsch "Bei meiner Ankunft habe ich eine Blumendusche erhalten."
+                                                                :English "On my arrival I was showered in flowers."}}
+                              "binnen" {:English "within" :Beispiel {:Deutsch "Binnen von drei Wochen hatte das Team eine stabile Demo produziert."
+                                                                     :English "Within three weeks the team had produced a stable demo."}}
+                              "bis" {:English "until" :Beispiel {:Deutsch "Warten Sie, bis ich komme."
+                                                                 :English "Wait until I come."}}
+                              "für" {:English "for" :Beispiel {:Deutsch "Der Schnee bleibt für vier Monate."
+                                                               :English "The snow stays for four months."}}
+                              "gegen" {:English "around" :Beispiel {:Deutsch "Wir kommen gegen 7:00 Uhr an."
+                                                                     :English "We arrive around 7:00 am"}}
+                              "in" {:English "in" :Beispiel {:Deutsch "Die show beginnt in einer Stunde."
+                                                             :English "The show begins in one hour."}}
+                              "innerhalb" {:English "within" :Beispiel {:Deutsch "Sie kommen innerhalb von einer Stunde an."
+                                                                        :English "They will arrive within one hour"}}
+                              "mit" {:English "at" :Beispiel {:Deutsch "Mit einem Mal waren wir von einem Kissenkampf umgeben."
+                                                              :English "All of a sudden we were surrounded by a pillow fight."}}
+                              "nach" {:English "after" :Beispiel {:Deutsch "Nach der Show werden wir für ein Bier gehen."
+                                                                  :English "After the the show we will go for a beer."}}
+                              "seit" {:English "since" :Beispiel {:Deutsch "Ich habe hier gelebt, seit ich zwanwig war."
+                                                                  :English "I have lived here since I was twenty."}}
+                              "über" {:English "over" :Beispiel {:Deutsch "Es wurde über das Internet veröffentlicht."
+                                                                 :English "It was transmitted all over the Internet."}}
+                              "um" {:English "around" :Beispiel {:Deutsch "Bitte kommen Sie (genau) um zehn."
+                                                                 :English "Please come at ten (sharp)."}}
+                              "unter" {:English "under" :Beispiel {:Deutsch "Der erste Fahrer beendete das Tenne unter der zwei Stunden Marke."
+                                                                   :English "The first driver finished the race under the two hour mark."}}
+                              "von" {:English "from" :Beispiel {:Deutsch "Die Hacker kamen von Berlin nach Hamburg for the C3-Konferenz."
+                                                                :English "The Hackers came from Berlin to Hamburg for the C3 conference."}}
+                              "vor" {:English "before" :Beispiel {:Deutsch "Vor ihrem zehnten Geburtstag wurden ihre Fähigkeiten aufgedeckt."
+                                                                  :English "Before her tenth birthday her skills were revealed."}}
+                              "während" {:English "during" :Beispiel {:Deutsch "Ich werde es während der Woche liefern."
+                                                                      :English "I will deliver it during the week."}}
+                              "zu" {:English "at" :Beispiel {:Deutsch "Wir kamen zu einer späten Stunde an."
+                                                             :English "We arrived at a late hour."}}
+                              "zwischen" {:English "between" :Beispiel {:Deutsch "Der Landezeit wird zwischen ein und zwei Stunden geschätzt."
+                                                                        :English "The landing time is estimated between one and two hours."}}})
+
+(def Kurzform-Präpositionen {:dem {:im "in dem"
+                                   :am "am dem"
+                                   :beim "bei dem"
+                                   :vom "von dem"
+                                   :zum "zu dem"}
+                             :das {:ans "an das"
+                                   :ins "in das"
+                                   :aufs "auf das"
+                                   :fürs "für das"
+                                   :ums "um das"}})
 
 ; Some additional info:
 ; http://canoo.net/services/OnlineGrammar/Wort/Artikel/Artikelwort/Liste.html
@@ -292,7 +341,6 @@
                                          :ihr "gesundet"
                                          :sie-Sie "gesunden"}
                                :Perfekt "gesundet"}
-
                    "glauben" {:English "believe"
                               :Hilfsverb :haben
                               :Präsens {:ich "glabe"
@@ -329,6 +377,15 @@
                                        :ihr "heißt"
                                        :sie-Sie "heißen"}
                              :Perfekt "gehißen"}
+                   "hinweisen" {:English "point out"
+                                :Hilfsverb :haben
+                                :Präsens {:ich "weise hin"
+                                          :du "weist hin"
+                                          :er-sie-es "weist hin"
+                                          :wir "weisen hin"
+                                          :ihr "weist hin"
+                                          :sie-Sie "weisen hin"}
+                                :Perfekt "hingewiesen"}
                    "holen" {:English "fetch"
                             :Hilfsverb :haben
                             :Präsens {:ich "hole"
@@ -446,7 +503,7 @@
                                          :ihr "öffnet"
                                          :sie-Sie "öffnen"}
                                :Perfekt "geöffnet"}
-                   "raten" {:English "guess"
+                   "raten" {:English "advice / guess"
                             :Hilfsverb :haben
                             :Präsens {:ich "rate"
                                       :du "rätst"
@@ -464,7 +521,6 @@
                                          :ihr "räumt"
                                          :sie-Sie "räumen"}
                                :Perfekt "geräumt"}
-
                    "sagen" {:English "say"
                             :Hilfsverb :haben
                             :Präsens {:ich "sage"
@@ -546,6 +602,15 @@
                                        :ihr "tretet"
                                        :sie-Sie "treten"}
                              :Perfekt "getreten"}
+                   "übertragen" {:English "trasnit"
+                                 :Hilfsverb :haben
+                                 :Präsens {:ich "übertrage"
+                                           :du "übertragst"
+                                           :er-sie-es "übertragt"
+                                           :wir "übertragen"
+                                           :ihr "übertragt"
+                                           :sie-Sie "übertragen"}
+                                 :Perfekt "übertragen"}
                    "umsteigen" {:English "change"
                                 :Hilfsverb :sein
                                 :Präsens {:ich "steige um"
@@ -582,6 +647,15 @@
                                               :ihr "verheiratet"
                                               :sie-Sie "verheiraten"}
                                   :Perfekt "verheiratet"}
+                   "veröffentlichen" {:English "publish"
+                                      :Hilfsverb :haben
+                                      :Präsens {:ich "veröffentliche"
+                                                :du "veröffentlichst"
+                                                :er-sie-es "veröffentlicht"
+                                                :wir "veröffentlichen"
+                                                :ihr "veröffentlicht"
+                                                :sie-Sie "veröffentlichen"}
+                                      :Perfekt "veröffentlicht"}
                    "werden" {:English "become"
                              :Hilfsverb :sein
                              :Präsens {:ich "werde"
@@ -591,7 +665,6 @@
                                        :ihr "werdet"
                                        :sie-Sie "werden"}
                              :Perfekt "geworden"}
-
                    "wissen" {:English "know"
                              :Hilfsverb :haben
                              :Präsens {:ich "weiß"
@@ -619,8 +692,6 @@
                                        :ihr "zahlt"
                                        :sie-Sie "zahlen"}
                              :Perfekt "gezahlt"}}))
-
-
 
 ; want a way to resolve the keyword, but still mark it as Plural Nomen
 (def plural-artikel :die)
@@ -742,6 +813,8 @@
                                   :English "Medicinal Herbs"}
                    "Heim" {:Artikel :das
                            :English "Home"}
+                   "Hinweise" {:Artikel :der
+                               :English "Hint"}
                    "Hochshule" {:Artikel :die
                                 :English "College"}
                    "Holz" {:Artikel :das
@@ -830,6 +903,8 @@
                                 :English "Internship"}
                    "Preis" {:Artikel :der
                             :English "Price"}
+                   "Rat" {:Artikel :der
+                          :English "Advice"}
                    "Rätsel" {:Artikel :das
                              :English "Riddle"}
                    "Rathaus" {:Artikel :das
