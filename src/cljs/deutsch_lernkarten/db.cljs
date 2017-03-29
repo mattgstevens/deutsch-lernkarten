@@ -42,6 +42,7 @@
                "genau" "exactly"
                "günstig" "cheap"
                "richtig" "correct"
+               "schwach" "weak"
                "super" "great"
                "teuer" "expensive"
                "toll" "great"
