@@ -71,7 +71,7 @@
                          [:th (str (first genderTuple))]
                          (for [kasus kasusList]
                            ^{:key (str "tbody-" kasus)}
-                           [:th (str (get (second genderTuple) kasus))])])]])]]]]))]]))))
+                           [:th (str (or (get (second genderTuple) kasus) "-"))])])]])]]]]))]]))))
 
 (defn verben-liste-szene []
   (let [Verben (re-frame/subscribe [:Fakten/Verben])]

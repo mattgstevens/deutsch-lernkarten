@@ -117,6 +117,41 @@
                                    :ums "um das"}})
 
 ; Some additional info:
+; http://canoo.net/services/OnlineGrammar/InflectionRules/FRegeln-P/Pron-Pers.html
+(def PersonalPronomen {:Singular {:Erste-Person {:Nominativ "ich"
+                                                 :Akkusativ "mich"
+                                                 :Dativ "mir"
+                                                 :Genitiv "meiner"}
+                                  :Zweite-Person {:Nominativ "du"
+                                                  :Akkusativ "dich"
+                                                  :Dativ "dir"
+                                                  :Genitiv "deiner"}
+                                  :Dritte-Person-Maskulin {:Nominativ "er"
+                                                           :Akkusativ "ihn"
+                                                           :Dativ "ihm"
+                                                           :Genitiv "seiner"}
+                                  :Dritte-Person-Neutrum {:Nominativ "es"
+                                                          :Akkusativ "es"
+                                                          :Dativ "ihm"
+                                                          :Genitiv "seiner"}
+                                  :Dritte-Person-Feminin {:Nominativ "sie"
+                                                          :Akkusativ "sie"
+                                                          :Dativ "ihr"
+                                                          :Genitiv "ihrer"}}
+                       :Plural {:Erste-Person {:Nominativ "wir"
+                                               :Akkusativ "uns"
+                                               :Dativ "uns"
+                                               :Genitiv "unser"}
+                                :Zweite-Person {:Nominativ "ihr"
+                                                :Akkusativ "euch"
+                                                :Dativ "euch"
+                                                :Genitiv "euer"}
+                                :Dritte-Person {:Nominativ "sie"
+                                                :Akkusativ "sie"
+                                                :Dativ "ihnen"
+                                                :Genitiv "ihrer"}}})
+
+; Some additional info:
 ; http://canoo.net/services/OnlineGrammar/Wort/Artikel/Artikelwort/Liste.html
 (def Pronomina {"das" {:English "the"
                        :Maskulin {:Nominativ "der"
@@ -240,6 +275,15 @@
                                            :ihr "steigt aus"
                                            :sie-Sie "steigen aus"}
                                  :Perfekt "ausgestiegen"}
+                   "bekommen" {:English "get"
+                               :Hilfsverb :haben-sein
+                               :Präsens {:ich "bekomme"
+                                         :du "bekommst"
+                                         :er-sie-es "bekommt"
+                                         :wir "bekommen"
+                                         :ihr "bekommt"
+                                         :sie-Sie "bekommen"}
+                               :Perfekt "bekommen"}
                    "bitten" {:English "you are welcome"
                              :Hilfsverb :haben
                              :Präsens {:ich "bitte"
@@ -320,8 +364,18 @@
                                       :er-sie-es "gibt"
                                       :wir "geben"
                                       :ihr "gebt"
-                                      :sie-Sie "geben"}
-                            :Perfekt "gegeben"}
+                                      :sie-Sie "geben"}}
+                   "gefallen" {:English "like"
+                               :Hilfsverb :haben
+                               :Präsens {:ich "gefalle"
+                                         :du "gefällst"
+                                         :er-sie-es "gefällt"
+                                         :wir "gefallen"
+                                         :ihr "gefallt"
+                                         :sie-Sie "gefallen"}
+                               :Perfekt "gefallen"}
+
+                            :Perfekt "gegeben"
                    "gehen" {:English "go"
                             :Hilfsverb :sein
                             :Präsens {:ich "gehe"
@@ -331,7 +385,15 @@
                                       :ihr "geht"
                                       :sie-Sie "gehen"}
                             :Perfekt "gegangen"}
-
+                   "gehören" {:English "belong"
+                               :Hilfsverb :haben
+                               :Präsens {:ich "gehöre"
+                                         :du "gehörst"
+                                         :er-sie-es "gehört"
+                                         :wir "gehören"
+                                         :ihr "gehört"
+                                         :sie-Sie "gehören"}
+                               :Perfekt "gehört"}
                    "gesunden" {:English "healthy"
                                :Hilfsverb :sein
                                :Präsens {:ich "gesunde"
@@ -395,6 +457,16 @@
                                       :ihr "holt"
                                       :sie-Sie "holen"}
                             :Perfekt "geholt"}
+                   "kriegen" {:English "get"
+                              :Hilfsverb :haben
+                              :Präsens {:ich "kriege"
+                                        :du "kriegst"
+                                        :er-sie-es "kriegt"
+                                        :wir "kriegen"
+                                        :ihr "kriegt"
+                                        :sie-Sie "kriegen"}
+                              :Perfekt "gekriegt"}
+
                    "können" {:English "can"
                              :Hilfsverb :haben
                              :Präsens {:ich "kann"
@@ -683,6 +755,15 @@
                                        :ihr "wonnt"
                                        :sie-Sie "wohnen"}
                              :Perfekt "gewohnt"}
+                   "wollen" {:English "will"
+                             :Hilfsverb :haben
+                             :Präsens {:ich "will"
+                                       :du "willst"
+                                       :er-sie-es "will"
+                                       :wir "wollen"
+                                       :ihr "wollt"
+                                       :sie-Sie "wollen"}
+                             :Perfekt "gewollt"}
                    "zahlen" {:English "Pay"
                              :Hilfsverb :haben
                              :Präsens {:ich "zahle"
