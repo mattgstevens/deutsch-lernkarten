@@ -348,7 +348,6 @@
                                        :ihr "fault"
                                        :sie-Sie "faulen"}
                              :Perfekt "gefault"}
-
                    "finden" {:English "find"
                              :Hilfsverb :haben
                              :Präsens {:ich "finde"
@@ -365,7 +364,8 @@
                                       :er-sie-es "gibt"
                                       :wir "geben"
                                       :ihr "gebt"
-                                      :sie-Sie "geben"}}
+                                      :sie-Sie "geben"}
+                            :Perfekt "gegeben"}
                    "gefallen" {:English "like"
                                :Hilfsverb :haben
                                :Präsens {:ich "gefalle"
@@ -375,8 +375,6 @@
                                          :ihr "gefallt"
                                          :sie-Sie "gefallen"}
                                :Perfekt "gefallen"}
-
-                            :Perfekt "gegeben"
                    "gehen" {:English "go"
                             :Hilfsverb :sein
                             :Präsens {:ich "gehe"
@@ -467,7 +465,6 @@
                                         :ihr "kriegt"
                                         :sie-Sie "kriegen"}
                               :Perfekt "gekriegt"}
-
                    "können" {:English "can"
                              :Hilfsverb :haben
                              :Präsens {:ich "kann"
