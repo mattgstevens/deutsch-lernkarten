@@ -30,7 +30,7 @@
                              :figwheel     {:on-jsload "deutsch-lernkarten.core/mount-root"}
                              :compiler     {:main                 deutsch-lernkarten.core
                                             :output-to            "resources/public/js/compiled/app.js"
-                                            :output-dir            "resources/public/js/compiled"
+                                            :output-dir            "resources/public/js/compiled/out"
                                             :asset-path           "js/compiled/out"
                                             :source-map-timestamp true
                                             :preloads             [devtools.preload]
