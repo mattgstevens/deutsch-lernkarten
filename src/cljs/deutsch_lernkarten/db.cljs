@@ -1,4 +1,6 @@
-(ns deutsch-lernkarten.db)
+(ns deutsch-lernkarten.db
+  (:require [clojure.spec :as spec]
+            [clojure.string :as string]))
 
 (def why-learn [{:Deutsch "Die Nomen und Artikel sind für immer zusammen. Es gibt keine Alternative."
                  :English "The noun and article are forever together. There is no alternative."}
@@ -9,102 +11,109 @@
                 {:Deutsch "Ich weiß es nicht, aber lasst uns herausfinde."
                  :English "I do not know, but let's find out."}])
 
-(def phrases {"Aber gut geht er mir." "But I am doing well."
-              "Das schaffe ich." "I can do it."
-              "Ich bin hell wach!" "I am so awake!"
-              "Ich habe es nie gehabt." "I have never had it."
-              "Ich liebe Lampe." "I love lamp."
-              "Mein Hund fraß eine Katze." "My dog ate a cat."
-              "Mein Löffel ist zu groß." "My spoon is to big."})
+(def phrases (into (sorted-map)
+                   {"Aber gut geht er mir." "But I am doing well."
+                    "Das schaffe ich." "I can do it."
+                    "Ich bin hell wach!" "I am so awake!"
+                    "Ich habe es nie gehabt." "I have never had it."
+                    "Ich liebe Lampe." "I love lamp."
+                    "Mein Hund fraß eine Katze." "My dog ate a cat."
+                    "Mein Löffel ist zu groß." "My spoon is to big."}))
 
-(def Adverb {"doch" "but"
-             "ja" "yes"
-             "jawohl" "yes sir"
-             "nein" "no"
-             "noch" "still"
-             "nur" "only"
-             "vielleicht" "maybe / perhaps"
-             "wieder" "again"})
+(def Adverb (into (sorted-map)
+                  {"doch" "but"
+                   "ja" "yes"
+                   "jawohl" "yes sir"
+                   "nein" "no"
+                   "noch" "still"
+                   "nur" "only"
+                   "vielleicht" "maybe / perhaps"
+                   "wieder" "again"}))
 
-(def W-Frage {"Wann" "When"
-              "Warum" "Why"
-              "Was" "What"
-              "Welche" "Which"
-              "Wer" "Who"
-              "Wie" "How"
-              "Wo" "Where"})
+(def W-Frage (into (sorted-map)
+                   {"Wann" "When"
+                    "Warum" "Why"
+                    "Was" "What"
+                    "Welche" "Which"
+                    "Wer" "Who"
+                    "Wie" "How"
+                    "Wo" "Where"}))
 
-(def Adjektiv {"arbeitslos" "unemployed"
-               "allein" "alone"
-               "erfolgreiches" "successful"
-               "falsch" "incorrect"
-               "gemütlich" "cozy"
-               "genau" "exactly"
-               "günstig" "cheap"
-               "richtig" "correct"
-               "schwach" "weak"
-               "super" "great"
-               "teuer" "expensive"
-               "toll" "great"
-               "verschiedene" "various"
-               "wichtige" "important"})
+(def Adjektiv (into (sorted-map)
+                    {"arbeitslos" "unemployed"
+                     "allein" "alone"
+                     "erfolgreiches" "successful"
+                     "falsch" "incorrect"
+                     "gemütlich" "cozy"
+                     "genau" "exactly"
+                     "günstig" "cheap"
+                     "richtig" "correct"
+                     "schon" "already"
+                     "schwach" "weak"
+                     "super" "great"
+                     "teuer" "expensive"
+                     "toll" "great"
+                     "verschiedene" "various"
+                     "wichtige" "important"}))
 
-(def Lokale-Präpositionen {"auf" "on"
-                           "an" "on the side of"
-                           "neben" "near"
-                           "vor" "in front"
-                           "hinter" "behind"
-                           "zwischen" "between"
-                           "über" "over"
-                           "unter" "under"
-                           "in" "inside"})
+(def Lokale-Präpositionen (into (sorted-map)
+                                {"auf" "on"
+                                 "an" "on the side of"
+                                 "neben" "near"
+                                 "vor" "in front"
+                                 "hinter" "behind"
+                                 "zwischen" "between"
+                                 "über" "over"
+                                 "unter" "under"
+                                 "in" "inside"}))
 
-(def Temporale-Präpositionen {"ab" {:English "as of" :Beispiel {:Deutsch "Keine weiteren Berichte ab 10:00 Uhr."
-                                                                :English "No further reports as of 10:00 am."}}
-                              "an" {:English "at" :Beispiel {:Deutsch "An welchem Tag hast du Geburtstag?"
-                                                             :English "At which day is your birthday?"}}
-                              "auf" {:English "on" :Beispiel {:Deutsch "Lass uns auf dem Bahnsteig am Hauptbahnhof treffen."
-                                                              :English "Let's meet on the platform at the Central station."}}
-                              "aus" {:English "from" :Beispiel {:Deutsch "Dieser Stil der Moderne stammt aus der Bauhauszeit."
-                                                                :English "This style of modernism is from the Bauhaus period."}}
-                              "außerhalb" {:English "outside" :Beispiel {:Deutsch "Dieses Produkt wird außerhalb dieser Saison versandt."
-                                                                         :English "This product will be shipped outside this season."}}
-                              "bei" {:English "near" :Beispiel {:Deutsch "Bei meiner Ankunft habe ich eine Blumendusche erhalten."
-                                                                :English "On my arrival I was showered in flowers."}}
-                              "binnen" {:English "within" :Beispiel {:Deutsch "Binnen von drei Wochen hatte das Team eine stabile Demo produziert."
-                                                                     :English "Within three weeks the team had produced a stable demo."}}
-                              "bis" {:English "until" :Beispiel {:Deutsch "Warten Sie, bis ich komme."
-                                                                 :English "Wait until I come."}}
-                              "für" {:English "for" :Beispiel {:Deutsch "Der Schnee bleibt für vier Monate."
-                                                               :English "The snow stays for four months."}}
-                              "gegen" {:English "around" :Beispiel {:Deutsch "Wir kommen gegen 7:00 Uhr an."
-                                                                     :English "We arrive around 7:00 am"}}
-                              "in" {:English "in" :Beispiel {:Deutsch "Die show beginnt in einer Stunde."
-                                                             :English "The show begins in one hour."}}
-                              "innerhalb" {:English "within" :Beispiel {:Deutsch "Sie kommen innerhalb von einer Stunde an."
-                                                                        :English "They will arrive within one hour"}}
-                              "mit" {:English "at" :Beispiel {:Deutsch "Mit einem Mal waren wir von einem Kissenkampf umgeben."
-                                                              :English "All of a sudden we were surrounded by a pillow fight."}}
-                              "nach" {:English "after" :Beispiel {:Deutsch "Nach der Show werden wir für ein Bier gehen."
-                                                                  :English "After the the show we will go for a beer."}}
-                              "seit" {:English "since" :Beispiel {:Deutsch "Ich habe hier gelebt, seit ich zwanwig war."
-                                                                  :English "I have lived here since I was twenty."}}
-                              "über" {:English "over" :Beispiel {:Deutsch "Es wurde über das Internet veröffentlicht."
-                                                                 :English "It was transmitted all over the Internet."}}
-                              "um" {:English "around" :Beispiel {:Deutsch "Bitte kommen Sie (genau) um zehn."
-                                                                 :English "Please come at ten (sharp)."}}
-                              "unter" {:English "under" :Beispiel {:Deutsch "Der erste Fahrer beendete das Tenne unter der zwei Stunden Marke."
-                                                                   :English "The first driver finished the race under the two hour mark."}}
-                              "von" {:English "from" :Beispiel {:Deutsch "Die Hacker kamen von Berlin nach Hamburg for the C3-Konferenz."
-                                                                :English "The Hackers came from Berlin to Hamburg for the C3 conference."}}
-                              "vor" {:English "before" :Beispiel {:Deutsch "Vor ihrem zehnten Geburtstag wurden ihre Fähigkeiten aufgedeckt."
-                                                                  :English "Before her tenth birthday her skills were revealed."}}
-                              "während" {:English "during" :Beispiel {:Deutsch "Ich werde es während der Woche liefern."
-                                                                      :English "I will deliver it during the week."}}
-                              "zu" {:English "at" :Beispiel {:Deutsch "Wir kamen zu einer späten Stunde an."
-                                                             :English "We arrived at a late hour."}}
-                              "zwischen" {:English "between" :Beispiel {:Deutsch "Der Landezeit wird zwischen ein und zwei Stunden geschätzt."
-                                                                        :English "The landing time is estimated between one and two hours."}}})
+(def Temporale-Präpositionen (into (sorted-map)
+                                   {"ab" {:English "as of" :Beispiel {:Deutsch "Keine weiteren Berichte ab 10:00 Uhr."
+                                                                      :English "No further reports as of 10:00 am."}}
+                                    "an" {:English "at" :Beispiel {:Deutsch "An welchem Tag hast du Geburtstag?"
+                                                                   :English "At which day is your birthday?"}}
+                                    "auf" {:English "on" :Beispiel {:Deutsch "Lass uns auf dem Bahnsteig am Hauptbahnhof treffen."
+                                                                    :English "Let's meet on the platform at the Central station."}}
+                                    "aus" {:English "from" :Beispiel {:Deutsch "Dieser Stil der Moderne stammt aus der Bauhauszeit."
+                                                                      :English "This style of modernism is from the Bauhaus period."}}
+                                    "außerhalb" {:English "outside" :Beispiel {:Deutsch "Dieses Produkt wird außerhalb dieser Saison versandt."
+                                                                               :English "This product will be shipped outside this season."}}
+                                    "bei" {:English "near" :Beispiel {:Deutsch "Bei meiner Ankunft habe ich eine Blumendusche erhalten."
+                                                                      :English "On my arrival I was showered in flowers."}}
+                                    "binnen" {:English "within" :Beispiel {:Deutsch "Binnen von drei Wochen hatte das Team eine stabile Demo produziert."
+                                                                           :English "Within three weeks the team had produced a stable demo."}}
+                                    "bis" {:English "until" :Beispiel {:Deutsch "Warten Sie, bis ich komme."
+                                                                       :English "Wait until I come."}}
+                                    "für" {:English "for" :Beispiel {:Deutsch "Der Schnee bleibt für vier Monate."
+                                                                     :English "The snow stays for four months."}}
+                                    "gegen" {:English "around" :Beispiel {:Deutsch "Wir kommen gegen 7:00 Uhr an."
+                                                                          :English "We arrive around 7:00 am"}}
+                                    "in" {:English "in" :Beispiel {:Deutsch "Die show beginnt in einer Stunde."
+                                                                   :English "The show begins in one hour."}}
+                                    "innerhalb" {:English "within" :Beispiel {:Deutsch "Sie kommen innerhalb von einer Stunde an."
+                                                                              :English "They will arrive within one hour"}}
+                                    "mit" {:English "at" :Beispiel {:Deutsch "Mit einem Mal waren wir von einem Kissenkampf umgeben."
+                                                                    :English "All of a sudden we were surrounded by a pillow fight."}}
+                                    "nach" {:English "after" :Beispiel {:Deutsch "Nach der Show werden wir für ein Bier gehen."
+                                                                        :English "After the the show we will go for a beer."}}
+                                    "seit" {:English "since" :Beispiel {:Deutsch "Ich habe hier gelebt, seit ich zwanwig war."
+                                                                        :English "I have lived here since I was twenty."}}
+                                    "über" {:English "over" :Beispiel {:Deutsch "Es wurde über das Internet veröffentlicht."
+                                                                       :English "It was transmitted all over the Internet."}}
+                                    "um" {:English "around" :Beispiel {:Deutsch "Bitte kommen Sie (genau) um zehn."
+                                                                       :English "Please come at ten (sharp)."}}
+                                    "unter" {:English "under" :Beispiel {:Deutsch "Der erste Fahrer beendete das Tenne unter der zwei Stunden Marke."
+                                                                         :English "The first driver finished the race under the two hour mark."}}
+                                    "von" {:English "from" :Beispiel {:Deutsch "Die Hacker kamen von Berlin nach Hamburg for the C3-Konferenz."
+                                                                      :English "The Hackers came from Berlin to Hamburg for the C3 conference."}}
+                                    "vor" {:English "before" :Beispiel {:Deutsch "Vor ihrem zehnten Geburtstag wurden ihre Fähigkeiten aufgedeckt."
+                                                                        :English "Before her tenth birthday her skills were revealed."}}
+                                    "während" {:English "during" :Beispiel {:Deutsch "Ich werde es während der Woche liefern."
+                                                                            :English "I will deliver it during the week."}}
+                                    "zu" {:English "at" :Beispiel {:Deutsch "Wir kamen zu einer späten Stunde an."
+                                                                   :English "We arrived at a late hour."}}
+                                    "zwischen" {:English "between" :Beispiel {:Deutsch "Der Landezeit wird zwischen ein und zwei Stunden geschätzt."
+                                                                              :English "The landing time is estimated between one and two hours."}}}))
 
 (def Kurzform-Präpositionen {:dem {:im "in dem"
                                    :am "am dem"
@@ -154,108 +163,109 @@
 
 ; Some additional info:
 ; http://canoo.net/services/OnlineGrammar/Wort/Artikel/Artikelwort/Liste.html
-(def Pronomina {"das" {:English "the"
-                       :Maskulin {:Nominativ "der"
-                                  :Akkusativ "den"
-                                  :Dativ "dem"
-                                  :Genitiv "dessen"}
-                       :Neutrum {:Nominativ  "das"
-                                 :Akkusativ "das"
-                                 :Dativ "dem"
-                                 :Genitiv "dessen"}
-                       :Feminin {:Nominativ "die"
-                                 :Akkusativ "die"
-                                 :Dativ "der"
-                                 :Genitiv "der"}
-                       :Plural {:Nominativ "die"
-                                :Akkusativ "die"
-                                :Dativ "den"
-                                :Genitiv "der"}}
-                "dein" {:English "your"
-                        :Maskulin {:Nominativ "dein"
-                                   :Akkusativ "deinen"
-                                   :Dativ "deinem"
-                                   :Genitiv "deines"}
-                        :Neutrum {:Nominativ "dein"
-                                  :Akkusativ "dein"
-                                  :Dativ "deinem"
-                                  :Genitiv "deines"}
-                        :Feminin {:Nominativ "deine"
-                                  :Akkusativ "deine"
-                                  :Dativ "deiner"
-                                  :Genitiv "deiner"}
-                        :Plural {:Nominativ "deine"
-                                 :Akkusativ "deine"
-                                 :Dativ "deinen"
-                                 :Genitiv "deiner"}}
-                "ein" {:English "a / an"
-                       :Maskulin {:Nominativ "ein"
-                                  :Akkusativ "einen"
-                                  :Dativ "einem"
-                                  :Genitiv "eines"}
-                       :Neutrum {:Nominativ "ein"
-                                 :Akkusativ "ein"
-                                 :Dativ "einem"
-                                 :Genitiv "eines"}
-                       :Feminin {:Nominativ "eine"
-                                 :Akkusativ "eine"
-                                 :Dativ "einer"
-                                 :Genitiv "einer"}
-                       :Plural {:Nominativ nil
-                                :Akkusativ nil
-                                :Dativ nil
-                                :Genitiv nil}}
-                "kein" {:English "not"
-                        :Maskulin {:Nominativ "kein"
-                                   :Akkusativ "keinen"
-                                   :Dativ "keinem"
-                                   :Genitiv "keines"}
-                        :Neutrum {:Nominativ "kein"
-                                  :Akkusativ "kein"
-                                  :Dativ "keinem"
-                                  :Genitiv "keines"}
-                        :Feminin {:Nominativ "keine"
-                                  :Akkusativ "keine"
-                                  :Dativ "keiner"
-                                  :Genitiv "keiner"}
-                        :Plural {:Nominativ "keine"
-                                 :Akkusativ "keine"
-                                 :Dativ "keinen"
-                                 :Genitiv "keiner"}}
-                "sich" {:English "themselves"
-                        :Maskulin {:Nominativ nil
-                                   :Akkusativ "sich"
-                                   :Dativ "sich"
-                                   :Genitiv "seiner"}
-                        :Neutrum {:Nominativ nil
-                                  :Akkusativ "sich"
-                                  :Dativ "sich"
-                                  :Genitiv "seiner"}
-                        :Feminin {:Nominativ nil
-                                  :Akkusativ "sich"
-                                  :Dativ "sich"
-                                  :Genitiv "ihrer"}
-                        :Plural {:Nominativ nil
-                                 :Akkusativ "sich"
-                                 :Dativ "sich"
-                                 :Genitiv "ihrer"}}
-                "sein" {:English "be"
-                        :Maskulin {:Nominativ "sein"
-                                   :Akkusativ "seinen"
-                                   :Dativ "seinem"
-                                   :Genitiv "sines"}
-                        :Neutrum {:Nominativ "sein"
-                                  :Akkusativ "sein"
-                                  :Dativ "seinem"
-                                  :Genitiv "seines"}
-                        :Feminin {:Nominativ "seine"
-                                  :Akkusativ "seine"
-                                  :Dativ "seiner"
-                                  :Genitiv "seiner"}
-                        :Plural {:Nominativ "seine"
-                                 :Akkusativ "seine"
-                                 :Dativ "seinen"
-                                 :Genitiv "seiner"}}})
+(def Pronomina (into (sorted-map)
+                     {"das" {:English "the"
+                             :Maskulin {:Nominativ "der"
+                                        :Akkusativ "den"
+                                        :Dativ "dem"
+                                        :Genitiv "dessen"}
+                             :Neutrum {:Nominativ  "das"
+                                       :Akkusativ "das"
+                                       :Dativ "dem"
+                                       :Genitiv "dessen"}
+                             :Feminin {:Nominativ "die"
+                                       :Akkusativ "die"
+                                       :Dativ "der"
+                                       :Genitiv "der"}
+                             :Plural {:Nominativ "die"
+                                      :Akkusativ "die"
+                                      :Dativ "den"
+                                      :Genitiv "der"}}
+                      "dein" {:English "your"
+                              :Maskulin {:Nominativ "dein"
+                                         :Akkusativ "deinen"
+                                         :Dativ "deinem"
+                                         :Genitiv "deines"}
+                              :Neutrum {:Nominativ "dein"
+                                        :Akkusativ "dein"
+                                        :Dativ "deinem"
+                                        :Genitiv "deines"}
+                              :Feminin {:Nominativ "deine"
+                                        :Akkusativ "deine"
+                                        :Dativ "deiner"
+                                        :Genitiv "deiner"}
+                              :Plural {:Nominativ "deine"
+                                       :Akkusativ "deine"
+                                       :Dativ "deinen"
+                                       :Genitiv "deiner"}}
+                      "ein" {:English "a / an"
+                             :Maskulin {:Nominativ "ein"
+                                        :Akkusativ "einen"
+                                        :Dativ "einem"
+                                        :Genitiv "eines"}
+                             :Neutrum {:Nominativ "ein"
+                                       :Akkusativ "ein"
+                                       :Dativ "einem"
+                                       :Genitiv "eines"}
+                             :Feminin {:Nominativ "eine"
+                                       :Akkusativ "eine"
+                                       :Dativ "einer"
+                                       :Genitiv "einer"}
+                             :Plural {:Nominativ nil
+                                      :Akkusativ nil
+                                      :Dativ nil
+                                      :Genitiv nil}}
+                      "kein" {:English "not"
+                              :Maskulin {:Nominativ "kein"
+                                         :Akkusativ "keinen"
+                                         :Dativ "keinem"
+                                         :Genitiv "keines"}
+                              :Neutrum {:Nominativ "kein"
+                                        :Akkusativ "kein"
+                                        :Dativ "keinem"
+                                        :Genitiv "keines"}
+                              :Feminin {:Nominativ "keine"
+                                        :Akkusativ "keine"
+                                        :Dativ "keiner"
+                                        :Genitiv "keiner"}
+                              :Plural {:Nominativ "keine"
+                                       :Akkusativ "keine"
+                                       :Dativ "keinen"
+                                       :Genitiv "keiner"}}
+                      "sich" {:English "themselves"
+                              :Maskulin {:Nominativ nil
+                                         :Akkusativ "sich"
+                                         :Dativ "sich"
+                                         :Genitiv "seiner"}
+                              :Neutrum {:Nominativ nil
+                                        :Akkusativ "sich"
+                                        :Dativ "sich"
+                                        :Genitiv "seiner"}
+                              :Feminin {:Nominativ nil
+                                        :Akkusativ "sich"
+                                        :Dativ "sich"
+                                        :Genitiv "ihrer"}
+                              :Plural {:Nominativ nil
+                                       :Akkusativ "sich"
+                                       :Dativ "sich"
+                                       :Genitiv "ihrer"}}
+                      "sein" {:English "be"
+                              :Maskulin {:Nominativ "sein"
+                                         :Akkusativ "seinen"
+                                         :Dativ "seinem"
+                                         :Genitiv "sines"}
+                              :Neutrum {:Nominativ "sein"
+                                        :Akkusativ "sein"
+                                        :Dativ "seinem"
+                                        :Genitiv "seines"}
+                              :Feminin {:Nominativ "seine"
+                                        :Akkusativ "seine"
+                                        :Dativ "seiner"
+                                        :Genitiv "seiner"}
+                              :Plural {:Nominativ "seine"
+                                       :Akkusativ "seine"
+                                       :Dativ "seinen"
+                                       :Genitiv "seiner"}}}))
 
 (def Verben (into (sorted-map)
                   {"arbeiten" {:English "working"
@@ -783,7 +793,7 @@
                    "Anfang" {:Artikel :der
                              :English "Beginning"}
                    "Angebot" {:Artikel :das
-                              :English "offer"}
+                              :English "Offer"}
                    "Antwort" {:Artikel :die
                               :English "Answer"}
                    "Arbeitgeber" {:Artikel :der
@@ -801,7 +811,7 @@
                    "Bank" {:Artikel :die
                            :English "Bank"}
                    "Bahnhof" {:Artikel :der
-                              :English "Train station"}
+                              :English "Train Station"}
                    "Balkon" {:Artikel :der
                              :English "Balcony"}
                    "Baum" {:Artikel :der
@@ -821,7 +831,7 @@
                    "Bruder" {:Artikel :der
                              :English "Brother"}
                    "Bürgeramt" {:Artikel :das
-                                :English "Town hall"}
+                                :English "Town Hall"}
                    "Café" {:Artikel :das
                            :English "Cafe"}
                    "Computer" {:Artikel :der
@@ -847,11 +857,11 @@
                    "Fahrrad" {:Artikel :das
                               :English "Bicycle"}
                    "Fall" {:Artikel :der
-                           :English "case"}
+                           :English "Case"}
                    "Familie" {:Artikel :die
                               :English "Family"}
                    "Familienstand" {:Artikel :der
-                                    :English "Marital status"}
+                                    :English "Marital Status"}
                    "Farbe" {:Artikel :die
                             :English "Colour"}
                    "Fenster" {:Artikel :das
@@ -871,7 +881,7 @@
                    "Garage" {:Artikel :die
                              :English "Garage"}
                    "Garderobe" {:Artikel :die
-                                :English "Cloak room"}
+                                :English "Cloak Room"}
                    "Garten" {:Artikel :der
                              :English "Garden"}
                    "Gegenstände" {:Artikel :der
@@ -879,13 +889,13 @@
                    "Geld" {:Artikel :das
                            :English "Money"}
                    "Genus" {:Artikel :das
-                            :English "Grammatical gender"}
+                            :English "Grammatical Gender"}
                    "Geschwister" {:Artikel plural-artikel
                                   :English "Siblings"}
                    "Glas" {:Artikel :das
                            :English "Glass"}
                    "Handy" {:Artikel :das
-                            :English "Mobile phone"}
+                            :English "Mobile Phone"}
                    "Haus" {:Artikel :das
                            :English "House"}
                    "Heilkräuter" {:Artikel :das
@@ -973,7 +983,7 @@
                    "Plastik" {:Artikel :das
                               :English "Plastic"}
                    "Pluralendung" {:Artikel :die
-                                   :English "Plural ending"}
+                                   :English "Plural Ending"}
                    "Polizei" {:Artikel :die
                               :English "Police"}
                    "Post" {:Artikel :die
@@ -987,7 +997,7 @@
                    "Rätsel" {:Artikel :das
                              :English "Riddle"}
                    "Rathaus" {:Artikel :das
-                              :English "Town hall"}
+                              :English "Town Hall"}
                    "Regel" {:Artikel :die
                             :English "Rule"}
                    "Restaurant" {:Artikel :das
@@ -1015,7 +1025,7 @@
                    "Sport" {:Artikel :der
                             :English "Sport"}
                    "Sportart" {:Artikel :die
-                               :English "Kind of sport"}
+                               :English "Kind Of Sport"}
                    "Straße" {:Artikel :die
                              :English "Street"}
                    "Stelle" {:Artikel :die
@@ -1047,7 +1057,7 @@
                    "Tasche" {:Artikel :die
                              :English "Bag"}
                    "Telefonummer" {:Artikel :der
-                                   :English "Telephone number"}
+                                   :English "Telephone Number"}
                    "Teppich" {:Artikel :der
                               :English "Carpet"}
                    "Tisch" {:Artikel :der
@@ -1073,7 +1083,7 @@
                    "Verkehr" {:Artikel :der
                               :English "Transport"}
                    "Vitrine" {:Artikel :die
-                              :English "Glass Cabinet / Display case"}
+                              :English "Display Cabinet"}
                    "Wand" {:Artikel :die
                            :English "Wall"}
                    "Wandschrank" {:Artikel :der
@@ -1085,7 +1095,7 @@
                    "Wohnung" {:Artikel :die
                               :English "Apartment"}
                    "Wohnzimmer" {:Artikel :das
-                                 :English "Living room"}
+                                 :English "Living Room"}
                    "Wunsch" {:Artikel :der
                              :English "Wish"}
                    "Zeit" {:Artikel :die
@@ -1093,6 +1103,66 @@
                    "Zentrum" {:Artikel :das
                               :English "Center"}}))
 
+; specs
+
+(defn capitalize-all-words-in-string
+  [x]
+  (string/join " "
+               (map #(string/capitalize %)
+                    (string/split x #"\s+"))))
+
+(defn upper-case?
+  [x]
+  #(= x (capitalize-all-words-in-string x)))
+
+(defn lower-case?
+  [x]
+  #(= x (string/lower-case x)))
+
+(defn null-or-string?
+  [x]
+  (or (nil? x) (string? x)))
+
+(def Pronomen-Gender (spec/keys :req-un [:Pronomen/Nominativ :Pronomen/Akkusativ :Pronomen/Dativ :Pronomen/Genitiv]))
+
+(spec/def :Pronomen/Nominativ null-or-string?)
+(spec/def :Pronomen/Akkusativ null-or-string?)
+(spec/def :Pronomen/Dativ null-or-string?)
+(spec/def :Pronomen/Genitiv null-or-string?)
+(spec/def :Pronomen/Plural Pronomen-Gender)
+(spec/def :Pronomen/Feminin Pronomen-Gender)
+(spec/def :Pronomen/Neutrum Pronomen-Gender)
+(spec/def :Pronomen/Maskulin Pronomen-Gender)
+(spec/def :Pronomen/English (spec/and string?
+                                    lower-case?))
+(spec/def :Fakten/Pronomen (spec/keys :req-un [:Pronomen/English :Pronomen/Maskulin :Pronomen/Neutrum :Pronomen/Feminin :Pronomen/Plural]))
+(spec/def :Fakten/Pronomina (spec/and #(instance? PersistentTreeMap %)
+                                      (spec/map-of string? :Fakten/Pronomen)))
+
+
+(spec/def :Verb/Hilfsverb #{:haben :sein :haben-sein})
+(spec/def :Verb/PersonalPronomen #{:ich :du :er-sie-es :wir :ihr :sie-Sie})
+(spec/def :Verb/English (spec/and string?
+                                  lower-case?))
+
+(spec/def :Verb/Perfekt string?)
+(spec/def :Verb/Präsens (spec/map-of :Verb/PersonalPronomen string?))
+(spec/def :Fakten/Verb (spec/keys :req-un [:Verb/English :Verb/Hilfsverb :Verb/Präsens :Verb/Perfekt]))
+(spec/def :Fakten/Verben (spec/and #(instance? PersistentTreeMap %)
+                                   (spec/map-of string? :Fakten/Verb)))
+
+(spec/def :Nomen/Artikel #{:die :der :das})
+(spec/def :Nomen/English (spec/and string?
+                                   upper-case?))
+(spec/def :Fakten/Nomen (spec/keys :req-un [:Nomen/Artikel :Nomen/English]))
+(spec/def :Fakten/Nomina (spec/and #(instance? PersistentTreeMap %)
+                                   (spec/map-of string? :Fakten/Nomen)))
+
+(spec/def ::Fakten (spec/keys :req-un [:Fakten/Nomina :Fakten/Pronomina :Fakten/Verben]))
+
+(spec/def ::app-db (spec/keys :req-un [::Fakten]))
+
+; db init
 (def default-db {:Fakten {:Nomina Nomina
                           :Pronomina Pronomina
                           :Verben Verben}

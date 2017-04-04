@@ -1,5 +1,5 @@
 (ns deutsch-lernkarten.classnames
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as string]))
 
 (defn- classes-reducer [acc x]
   (condp #(%1 %2) x
@@ -17,4 +17,4 @@
        (parse-classes)
        (filter #(val %))
        (keys)
-       (clojure.string/join " ")))
+       (string/join " ")))
