@@ -121,9 +121,11 @@
 (defn stamm-szene []
   (let [aktiv-szene (re-frame/subscribe [:routes/aktiv-szene])]
     (fn []
-      (let [szene @aktiv-szene]
+      (let [renderSzene (get szeneMap @aktiv-szene)]
         [:div {:className "app-root"}
           [layout/top-nav-bar]
-          (if (contains? szeneMap szene)
-            (get szeneMap szene)
-            (get szeneMap :vier-null-vier))]))))
+          (if (nil? @aktiv-szene)
+            nil
+            (if (nil? renderSzene)
+              (get szeneMap :vier-null-vier)
+              renderSzene))]))))
