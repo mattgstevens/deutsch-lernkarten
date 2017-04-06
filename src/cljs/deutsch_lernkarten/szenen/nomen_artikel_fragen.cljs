@@ -49,7 +49,7 @@
        (if (nil? aktiv-antwort)
          (name aktiv-nomen)
          [:div
-          (str (name (:Artikel nomen-fakten)) " " (name aktiv-nomen) " ( " (:English nomen-fakten) " )")
+          (str (name (:Artikel nomen-fakten)) " " (name aktiv-nomen) " (" (:English nomen-fakten) ")")
           [:span {:className "fira-icon is-primary is-pulled-right" :on-click #(re-frame/dispatch [:nomen-artikel-fragen/gesehen-aktiv-nomen])} "->>"]])]]
 
     [:footer {:className "card-footer"}

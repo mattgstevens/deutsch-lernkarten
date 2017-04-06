@@ -36,7 +36,7 @@
                  [:div {:className "tile is-ancestor"}
                   [:div {:className "tile is-vertical is-parent"}
                    [:div {:className "notification is-info"} (str (name Artikel) " " Nomen)]
-                   [:div {:className "notification"} (str "( " English " )")]]]]))]]))))
+                   [:div {:className "notification"} (str "(" English ")")]]]]))]]))))
 
 (defn pronomen-liste-szene []
   (let [Pronomina (re-frame/subscribe [:Fakten/Pronomina])]
@@ -51,7 +51,7 @@
                [:div {:className "tile is-ancestor"}
                 [:div {:className "tile is-vertical is-parent"}
                  [:div {:className "notification is-info"} (str Pronomen)]
-                 [:div {:className "notification"} (str English)]
+                 [:div {:className "notification"} (str "(" English ")")]
                  [:div {:className "notification is-warning"}
                   (let [kasusList [:Nominativ :Akkusativ :Dativ :Genitiv]]
                     [:table {:className "table"}
@@ -86,7 +86,7 @@
                  [:div {:className "tile is-ancestor"}
                     [:div {:className "tile is-vertical is-parent"}
                      [:div {:className "notification is-info"} (str Verb)]
-                     [:div {:className "notification"} (str "( " English " )")]
+                     [:div {:className "notification"} (str "(" English ")")]
                      [:div {:className "tile is-child notification is-warning"}
                       (for [Person (keys Präsens)]
                         (let [verbForm (get Präsens Person)]
