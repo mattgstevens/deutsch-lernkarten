@@ -161,6 +161,9 @@
                                                 :Dativ "ihnen"
                                                 :Genitiv "ihrer"}}})
 
+(def Komposition {:Verben-plus-Nomen (into (sorted-map)
+                                           {"Bestellanforderung" "Ordering Requirement"})})
+
 ; Some additional info:
 ; http://canoo.net/services/OnlineGrammar/Wort/Artikel/Artikelwort/Liste.html
 (def Pronomina (into (sorted-map)
@@ -295,6 +298,16 @@
                                          :ihr "bekommt"
                                          :sie-Sie "bekommen"}
                                :Perfekt "bekommen"}
+                   "bestellen" {:English "to order"
+                                :Hilfsverb :haben
+                                :Präsens {:ich "bestelle"
+                                          :du "bestellst"
+                                          :er-sie-es "bestellt"
+                                          :wir "bestellen"
+                                          :ihr "bestellt"
+                                          :sie-Sie "bestellen"}
+                                :Perfekt "bestellt"}
+
                    "bitten" {:English "you are welcome"
                              :Hilfsverb :haben
                              :Präsens {:ich "bitte"
@@ -358,6 +371,16 @@
                                        :ihr "fault"
                                        :sie-Sie "faulen"}
                              :Perfekt "gefault"}
+                   "fehlen" {:English "missing"
+                             :Hilfsverb :haben
+                               :Präsens {:ich "fehle"
+                                         :du "fehlst"
+                                         :er-sie-es "fehlt"
+                                         :wir "fehlen"
+                                         :ihr "fehlt"
+                                         :sie-Sie "fehlen"}
+                               :Perfekt "gefehlt"}
+
                    "finden" {:English "find"
                              :Hilfsverb :haben
                              :Präsens {:ich "finde"
@@ -792,6 +815,8 @@
                             :English "Traffic Light"}
                    "Anfang" {:Artikel :der
                              :English "Beginning"}
+                   "Anforderung" {:Artikel :die
+                                  :English "Requirement"}
                    "Angebot" {:Artikel :das
                               :English "Offer"}
                    "Antwort" {:Artikel :die
@@ -801,7 +826,23 @@
                    "Artikel" {:Artikel :der
                               :English "Item"}
                    "Arzt" {:Artikel :der
-                           :English "Doctor"}
+                           :English "Doctor"
+                           :Singular {:Nominativ {:Artikel :der
+                                                  :Nomen "Arzt"}
+                                      :Akkusativ {:Artikel :den
+                                                  :Nomen "Arzt"}
+                                      :Dativ {:Artikel :dem
+                                              :Nomen "Arzt"}
+                                      :Genitiv {:Artikel :des
+                                                :Nomen "Arztes"}}
+                           :Plural {:Nominativ {:Artikel :die
+                                                  :Nomen "Ärzte"}
+                                      :Akkusativ {:Artikel :die
+                                                  :Nomen "Ärzte"}
+                                      :Dativ {:Artikel :den
+                                              :Nomen "Ärzten"}
+                                      :Genitiv {:Artikel :der
+                                                :Nomen "Ärzte"}}}
                    "Ausbildung" {:Artikel :die
                                  :English "Training"}
                    "Auto" {:Artikel :das
@@ -816,6 +857,24 @@
                              :English "Balcony"}
                    "Baum" {:Artikel :der
                            :English "Tree"}
+                   "Berater" {:Artikel :der
+                              :English "Consultant"
+                              :Singular {:Nominativ {:Artikel :der
+                                                     :Nomen "Berater"}
+                                         :Akkusativ {:Artikel :den
+                                                     :Nomen "Berater"}
+                                         :Dativ {:Artikel :dem
+                                                 :Nomen "Berater"}
+                                         :Genitiv {:Artikel :des
+                                                   :Nomen "Beraters"}}
+                              :Plural {:Nominativ {:Artikel :die
+                                                     :Nomen "Berater"}
+                                         :Akkusativ {:Artikel :die
+                                                     :Nomen "Berater"}
+                                         :Dativ {:Artikel :den
+                                                 :Nomen "Beratern"}
+                                         :Genitiv {:Artikel :des
+                                                   :Nomen "Beraters"}}}
                    "Beruf" {:Artikel :der
                             :English "Profession"}
                    "Beschaffenheit" {:Artikel :die
@@ -838,10 +897,30 @@
                                :English "Computer"}
                    "Couch" {:Artikel :die
                             :English "Couch"}
+                   "Datenbank" {:Artikel :die
+                                :English "Database"
+                                :Singular {:Nominativ {:Artikel :die
+                                                       :Nomen "Datenbank"}
+                                           :Akkusativ {:Artikel :die
+                                                       :Nomen "Datenbank"}
+                                           :Dativ {:Artikel :der
+                                                   :Nomen "Datenbank"}
+                                           :Genitiv {:Artikel :der
+                                                     :Nomen "Datenbank"}}
+                                :Plural {:Nominativ {:Artikel :die
+                                                     :Nomen "Datenbanken"}
+                                         :Akkusativ {:Artikel :die
+                                                     :Nomen "Datenbanken"}
+                                         :Dativ {:Artikel :den
+                                                 :Nomen "Datenbanken"}
+                                         :Genitiv {:Artikel :der
+                                                   :Nomen "Datenbanken"}}}
                    "Disco" {:Artikel :die
                             :English "Disco"}
                    "Dom" {:Artikel :der
                           :English "Cathedral"}
+                   "Drittmittel" {:Artikel :die
+                                  :English "Third-party Funds"}
                    "Ehe" {:Artikel :die
                           :English "Marriage"}
                    "Eltern" {:Artikel plural-artikel
@@ -870,6 +949,10 @@
                            :English "Hallway"}
                    "Fluss" {:Artikel :der
                             :English "River"}
+                   "Forschung" {:Artikel :die
+                                :English "Research"}
+                   "Forschungsgemeinschaft" {:Artikel :die
+                                             :English "Research Foundation"}
                    "Form" {:Artikel :die
                            :English "Shape"}
                    "Frage" {:Artikel :die
@@ -888,6 +971,8 @@
                                   :English "Object"}
                    "Geld" {:Artikel :das
                            :English "Money"}
+                   "Gemeinschaft" {:Artikel :die
+                                   :English "Community"}
                    "Genus" {:Artikel :das
                             :English "Grammatical Gender"}
                    "Geschwister" {:Artikel plural-artikel
@@ -958,6 +1043,24 @@
                             :English "Furniture"}
                    "Mobilität" {:Artikel :die
                                 :English "Mobility"}
+                   "Moderator" {:Artikel :der
+                                :English "Moderator"
+                                :Singular {:Nominativ {:Artikel :der
+                                                       :Nomen "Moderator"}
+                                           :Akkusativ {:Artikel :den
+                                                       :Nomen "Moderator"}
+                                           :Dativ {:Artikel :dem
+                                                   :Nomen "Moderator"}
+                                           :Genitiv {:Artikel :des
+                                                     :Nomen "Moderators"}}
+                                :Plural {:Nominativ {:Artikel :die
+                                                     :Nomen "Moderatoren"}
+                                           :Akkusativ {:Artikel :die
+                                                       :Nomen "Moderatoren"}
+                                           :Dativ {:Artikel :den
+                                                   :Nomen "Moderatoren"}
+                                           :Genitiv {:Artikel :der
+                                                     :Nomen "Moderatoren"}}}
                    "Münze" {:Artikel :die
                             :English "Coin"}
                    "Museum" {:Artikel :das
@@ -992,6 +1095,8 @@
                                 :English "Internship"}
                    "Preis" {:Artikel :der
                             :English "Price"}
+                   "Projektleiter" {:Artikel :der
+                                    :English "Project Manager"}
                    "Rat" {:Artikel :der
                           :English "Advice"}
                    "Rätsel" {:Artikel :das
@@ -1082,6 +1187,24 @@
                            :English "Verb"}
                    "Verkehr" {:Artikel :der
                               :English "Transport"}
+                   "Vermittler" {:Artikel :der
+                                 :English "Facilitator"
+                                 :Singular {:Nominativ {:Artikel :der
+                                                        :Nomen "Vermittler"}
+                                            :Akkusativ {:Artikel :den
+                                                        :Nomen "Vermittler"}
+                                            :Dativ {:Artikel :dem
+                                                    :Nomen "Vermittler"}
+                                            :Genitiv {:Artikel :des
+                                                      :Nomen "Vermittlers"}}
+                                 :Plural {:Nominativ {:Artikel :die
+                                                        :Nomen "Vermittler"}
+                                            :Akkusativ {:Artikel :die
+                                                        :Nomen "Vermittler"}
+                                            :Dativ {:Artikel :den
+                                                    :Nomen "Vermittlern"}
+                                            :Genitiv {:Artikel :der
+                                                      :Nomen "Vermittler"}}}
                    "Vitrine" {:Artikel :die
                               :English "Display Cabinet"}
                    "Wand" {:Artikel :die
@@ -1101,7 +1224,9 @@
                    "Zeit" {:Artikel :die
                            :English "Time"}
                    "Zentrum" {:Artikel :das
-                              :English "Center"}}))
+                              :English "Center"}
+                   "Zusammenfassung" {:Artikel :die
+                                      :English "Summary"}}))
 
 ; specs
 
