@@ -1,9 +1,10 @@
 (ns deutsch-lernkarten.layout
-  (:require [re-frame.core :as re-frame]
-            [deutsch-lernkarten.classnames :as classnames]
-            [deutsch-lernkarten.routes :as routes]))
+    (:require [re-frame.core :as re-frame]
+              [deutsch-lernkarten.classnames :as classnames]
+              [deutsch-lernkarten.routes :as routes]
+              [deutsch-lernkarten.routing.table :as routing-table]))
 
-(defn top-nav-bar []
+(defn- top-nav-bar []
   (let [aktiv-szene (re-frame/subscribe [:routes/aktiv-szene])
         menü-aktiv (re-frame/subscribe [:navigation/menü-aktiv])]
     (fn []
@@ -19,3 +20,15 @@
           [:span]
           [:span]
           [:span]]]])))
+
+(defn- aktuell-szene []
+  (let [aktiv-szene (re-frame/subscribe [:routes/aktiv-szene])]
+    (fn []
+      (let [render-szene (routing-table/get-render-for-szene @aktiv-szene)]
+          [render-szene]))))
+
+
+(defn stamm-szene []
+  [:div {:className "app-root"}
+    [top-nav-bar]
+    [aktuell-szene]])

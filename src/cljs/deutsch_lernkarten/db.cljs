@@ -1166,5 +1166,5 @@
 (def default-db {:Fakten {:Nomina Nomina
                           :Pronomina Pronomina
                           :Verben Verben}
-                 :routes/aktiv-szene nil
+                 :routes/aktiv-szene :heim
                  :navigation/menü-aktiv false})

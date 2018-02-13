@@ -1,4 +1,4 @@
-(ns deustch-lernkarten.szenen.w-frage
+(ns deutsch-lernkarten.szenen.w-frage
   (:require [re-frame.core :as re-frame]
             [deutsch-lernkarten.classnames :as classnames]
             [deutsch-lernkarten.keyboard :as keyboard]

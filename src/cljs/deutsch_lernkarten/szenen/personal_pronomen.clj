@@ -1,8 +1,5 @@
-(ns deustch-lernkarten.szenen.personal-pronomen
-  (:require [re-frame.core :as re-frame]
-            [deutsch-lernkarten.classnames :as classnames]
-            [deutsch-lernkarten.keyboard :as keyboard]
-            [deutsch-lernkarten.routes :as routes]))
+(ns deutsch-lernkarten.szenen.personal-pronomen
+  (:require [re-frame.core :as re-frame]))
 
 ; Übung für dritte person:
 ; - given a Nomen choose PersonalPronomen in Nominativ, Akkusativ, Dativ, Genitiv
@@ -13,4 +10,4 @@
 ;              (Genitiv form, Plural Nomen)     Der Bücher  => Ihrer Bücher
 
 (defn stamm []
-  let [PersonalPronomen (re-frame/subscribe [:Fakten/PersonalPronomen])])
+  (let [PersonalPronomen (re-frame/subscribe [:Fakten/PersonalPronomen])]))
